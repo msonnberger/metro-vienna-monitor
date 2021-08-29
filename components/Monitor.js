@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
 import Display from './Display';
 import useInterval from '../hooks/useInterval';
 
@@ -34,12 +35,29 @@ const stations = {
   },
 };
 
+const StyledForm = styled.form`
+  display: flex;
+  gap: 5px;
+  margin-top: -50px;
+
+  select {
+    font-family: 'Helvetica';
+    font-weight: bold;
+    font-size: 20px;
+    border: 5px solid black;
+    background-color: #333;
+    color: #fcf799;
+    padding: 0.5em;
+    border-radius: 10px;
+  }
+`;
+
 const Monitor = () => {
   const [line, setLine] = useState('U1');
   const [station, setStation] = useState(Object.keys(stations['U1'])[0]);
   const [departures, setDepartures] = useState(null);
 
-  //useInterval(() => getNewDepartures(), 15000);
+  useInterval(() => getNewDepartures(), 15000);
   useEffect(() => getNewDepartures(), [station]);
 
   const handleStationChange = (ev) => {
@@ -56,22 +74,23 @@ const Monitor = () => {
 
   return (
     <>
-      <select value={line} onChange={(ev) => setLine(ev.target.value)}>
-        {lines &&
-          lines.map((line) => (
-            <option key={line} value={line}>
-              {line}
+      <StyledForm>
+        <select value={line} onChange={(ev) => setLine(ev.target.value)}>
+          {lines &&
+            lines.map((line) => (
+              <option key={line} value={line}>
+                {line}
+              </option>
+            ))}
+        </select>
+        <select value={station} onChange={handleStationChange}>
+          {Object.keys(stations[line]).map((stop) => (
+            <option key={stop} value={stop}>
+              {stop}
             </option>
           ))}
-      </select>
-      <select value={station} onChange={handleStationChange}>
-        {Object.keys(stations[line]).map((stop) => (
-          <option key={stop} value={stop}>
-            {stop}
-          </option>
-        ))}
-      </select>
-
+        </select>
+      </StyledForm>
       {departures && <Display data={departures} />}
     </>
   );
