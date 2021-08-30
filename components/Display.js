@@ -29,12 +29,23 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    width: 420px;
+    width: 430px;
     background-color: rgb(40, 40, 40);
     color: #fcf799;
-    padding: 0.5em 1em;
+    padding: 0.7em 1.3em;
+    padding-left: 0.5em;
     border-radius: 15px;
     box-shadow: 0 0 0 15px #000;
+    position: relative;
+  }
+
+  .monitor::before {
+    content: '';
+    width: 2px;
+    height: 97px;
+    background-color: #fcf799;
+    left: 72px;
+    position: absolute;
   }
 
   .monitor p {
@@ -45,10 +56,6 @@ const Wrapper = styled.div`
     font-weight: bold;
   }
 
-  .monitor span {
-    margin: 0 0.5em;
-  }
-
   .monitor span:last-child {
     margin-left: auto;
   }
@@ -57,6 +64,22 @@ const Wrapper = styled.div`
     transform: scale(2) translateY(8px);
     font-family: sans-serif;
     animation: ${blinking} 2s infinite step-start;
+  }
+
+  .platform-label,
+  .platform-num {
+    font-family: 'Roboto Condensed';
+    letter-spacing: -1.5px;
+    width: 60px;
+    text-align: center;
+    margin-right: 15px;
+    font-size: 22px;
+  }
+
+  .platform-num {
+    font-size: 34px;
+    line-height: 20px;
+    font-weight: 300;
   }
 
   .clock {
@@ -82,11 +105,11 @@ const Display = ({ data }) => {
 
   useInterval(() => setTime(new Date()), 1000);
 
-  const line1 = data[0].line || '';
-  const line2 = data[1].line || '';
+  const platform1 = data[0].platform || '';
+  const platform2 = data[1].platform || '';
 
-  let towards1 = data[0].towards || '';
-  let towards2 = data[1].towards || '';
+  let towards1 = data[0].towards || ['', ''];
+  let towards2 = data[1].towards || ['', ''];
 
   const countdowns1 = data[0].countdown || '';
   const countdowns2 = data[1].countdown || '';
@@ -110,8 +133,8 @@ const Display = ({ data }) => {
 
       <div className="monitor">
         <p>
-          <span>{line1}</span>
-          <span>{towards1}</span>
+          <span className="platform-label">Gleis</span>
+          <span>{towards1[0]}</span>
           {countdowns1[0] == 0 ? (
             <span className="zero">*</span>
           ) : (
@@ -119,8 +142,8 @@ const Display = ({ data }) => {
           )}
         </p>
         <p>
-          <span>{line1}</span>
-          <span>{towards1}</span>
+          <span className="platform-num">{platform1}</span>
+          <span>{towards1[1]}</span>
           {countdowns1[1] == 0 ? (
             <span className="zero">*</span>
           ) : (
@@ -130,8 +153,8 @@ const Display = ({ data }) => {
       </div>
       <div className="monitor">
         <p>
-          <span>{line2}</span>
-          <span>{towards2}</span>
+          <span className="platform-label">Gleis</span>
+          <span>{towards2[0]}</span>
           {countdowns2[0] == 0 ? (
             <span className="zero">*</span>
           ) : (
@@ -139,8 +162,8 @@ const Display = ({ data }) => {
           )}
         </p>
         <p>
-          <span>{line2}</span>
-          <span>{towards2}</span>
+          <span className="platform-num">{platform2}</span>
+          <span>{towards2[1]}</span>
           {countdowns2[1] == 0 ? (
             <span className="zero">*</span>
           ) : (

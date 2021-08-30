@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@fontsource/roboto-condensed": "^4.5.0",
     "@fontsource/tourney": "^4.5.0",
     "next": "11.1.0",
     "react": "17.0.2",

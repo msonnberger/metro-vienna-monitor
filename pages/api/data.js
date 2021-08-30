@@ -16,8 +16,14 @@ async function getMonitor(stopId) {
   const raw = await data.json();
   const lines = raw.data.monitors['0'].lines;
   const monitor = {};
-  monitor.line = lines['0'].name;
-  monitor.towards = lines['0'].towards.trim();
+  monitor.platform = lines['0'].platform;
+  monitor.towards = Array(2).fill(lines['0'].towards.trim());
+
+  if (monitor.towards[0].includes('NO DEPARTURE PLATFORM')) {
+    monitor.towards[0] = 'NICHT EINSTEIGEN !';
+    monitor.towards[1] = 'NO DEPARTURE';
+  }
+
   const departure = lines['0'].departures.departure;
 
   if (!isEmpty(departure[0].departureTime)) {

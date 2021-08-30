@@ -57,7 +57,7 @@ const Monitor = () => {
   const [station, setStation] = useState(Object.keys(stations['U1'])[0]);
   const [departures, setDepartures] = useState(null);
 
-  useInterval(() => getNewDepartures(), 15000);
+  //useInterval(() => getNewDepartures(), 15000);
   useEffect(() => getNewDepartures(), [station]);
 
   const handleStationChange = (ev) => {
