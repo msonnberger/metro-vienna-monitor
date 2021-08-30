@@ -37,49 +37,49 @@ const Wrapper = styled.div`
     border-radius: 15px;
     box-shadow: 0 0 0 15px #000;
     position: relative;
-  }
 
-  .monitor::before {
-    content: '';
-    width: 2px;
-    height: 97px;
-    background-color: #fcf799;
-    left: 72px;
-    position: absolute;
-  }
+    p {
+      margin: 0;
+      display: flex;
+      width: 100%;
+      font-size: 24px;
+      font-weight: bold;
+    }
 
-  .monitor p {
-    margin: 0;
-    display: flex;
-    width: 100%;
-    font-size: 24px;
-    font-weight: bold;
-  }
+    span:last-child {
+      margin-left: auto;
+    }
 
-  .monitor span:last-child {
-    margin-left: auto;
-  }
+    .zero {
+      transform: scale(2) translateY(8px);
+      font-family: sans-serif;
+      animation: ${blinking} 2s infinite step-start;
+    }
 
-  .monitor .zero {
-    transform: scale(2) translateY(8px);
-    font-family: sans-serif;
-    animation: ${blinking} 2s infinite step-start;
-  }
+    .platform-label,
+    .platform-num {
+      font-family: 'Roboto Condensed';
+      letter-spacing: -1.5px;
+      width: 60px;
+      text-align: center;
+      margin-right: 15px;
+      font-size: 22px;
+    }
 
-  .platform-label,
-  .platform-num {
-    font-family: 'Roboto Condensed';
-    letter-spacing: -1.5px;
-    width: 60px;
-    text-align: center;
-    margin-right: 15px;
-    font-size: 22px;
-  }
+    .platform-num {
+      font-size: 34px;
+      line-height: 20px;
+      font-weight: 300;
+    }
 
-  .platform-num {
-    font-size: 34px;
-    line-height: 20px;
-    font-weight: 300;
+    &::before {
+      content: '';
+      width: 2px;
+      height: 97px;
+      background-color: #fcf799;
+      left: 72px;
+      position: absolute;
+    }
   }
 
   .clock {
