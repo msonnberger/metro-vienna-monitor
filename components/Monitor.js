@@ -157,7 +157,7 @@ const Monitor = () => {
   const getNewDepartures = () => {
     const stopId1 = lineData[line][station][0];
     const stopId2 = lineData[line][station][1];
-    const url = `/api/data?stopId1=${stopId1}&stopId2=${stopId2}`;
+    const url = `api/data?stopId1=${stopId1}&stopId2=${stopId2}`;
     fetch(url)
       .then((res) => res.json())
       .then((json) => setDepartures(json));
