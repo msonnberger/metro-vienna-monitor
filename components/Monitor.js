@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import Display from './Display';
 import useInterval from '../hooks/useInterval';
@@ -141,8 +141,6 @@ const StyledForm = styled.form`
 
 const Heading = styled.h1`
   font-family: 'Helvetica', sans-serif;
-  margin-top: -100px;
-  margin-bottom: 100px;
   font-size: 42px;
 `;
 
@@ -151,22 +149,22 @@ const Monitor = () => {
   const [station, setStation] = useState(Object.keys(lineData['U1'])[0]);
   const [departures, setDepartures] = useState(null);
 
-  useInterval(() => getNewDepartures(), 15000);
-  useEffect(() => getNewDepartures(), [station]);
-
-  const getNewDepartures = () => {
+  const getNewDepartures = useCallback(() => {
     const stopId1 = lineData[line][station][0];
     const stopId2 = lineData[line][station][1];
     const url = `/api/data?stopId1=${stopId1}&stopId2=${stopId2}`;
     fetch(url)
       .then((res) => res.json())
       .then((json) => setDepartures(json));
-  };
+  }, [line, station]);
 
   const handleLineChange = (ev) => {
     setLine(ev.target.value);
     setStation(Object.keys(lineData[ev.target.value])[0]);
   };
+
+  useInterval(() => getNewDepartures(), 15000);
+  useEffect(() => getNewDepartures(), [getNewDepartures, station]);
 
   return (
     <>

@@ -135,40 +135,24 @@ const Display = ({ data }) => {
         <p>
           <span className="platform-label">Gleis</span>
           <span>{towards1[0]}</span>
-          {countdowns1[0] == 0 ? (
-            <span className="zero">*</span>
-          ) : (
-            <span>{countdowns1[0]}</span>
-          )}
+          {countdowns1[0] == 0 ? <span className="zero">*</span> : <span>{countdowns1[0]}</span>}
         </p>
         <p>
           <span className="platform-num">{platform1}</span>
           <span>{towards1[1]}</span>
-          {countdowns1[1] == 0 ? (
-            <span className="zero">*</span>
-          ) : (
-            <span>{countdowns1[1]}</span>
-          )}
+          {countdowns1[1] == 0 ? <span className="zero">*</span> : <span>{countdowns1[1]}</span>}
         </p>
       </div>
       <div className="monitor">
         <p>
           <span className="platform-label">Gleis</span>
           <span>{towards2[0]}</span>
-          {countdowns2[0] == 0 ? (
-            <span className="zero">*</span>
-          ) : (
-            <span>{countdowns2[0]}</span>
-          )}
+          {countdowns2[0] == 0 ? <span className="zero">*</span> : <span>{countdowns2[0]}</span>}
         </p>
         <p>
           <span className="platform-num">{platform2}</span>
           <span>{towards2[1]}</span>
-          {countdowns2[1] == 0 ? (
-            <span className="zero">*</span>
-          ) : (
-            <span>{countdowns2[1]}</span>
-          )}
+          {countdowns2[1] == 0 ? <span className="zero">*</span> : <span>{countdowns2[1]}</span>}
         </p>
       </div>
     </Wrapper>
